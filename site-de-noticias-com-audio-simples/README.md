@@ -18,6 +18,10 @@ O Info+ é um site simples que exibe notícias sobre os Jogos Paralímpicos de P
 - Seção de áudio com um player para ouvir a notícia.
 - Lista de medalhas conquistadas pelo Brasil.
 
+-  ## Acesse o Projeto
+
+Você pode acessar os projetos através da [página de deploy](https://gitgabcode.github.io/mini-projetos-web/site-de-noticias-com-audio-simples/).
+
 ## Como Usar
 
 1. Clone o repositório:
