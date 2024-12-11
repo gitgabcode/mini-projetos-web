@@ -23,8 +23,5 @@ O portfólio inclui:
 - **style.css**: Estilo e responsividade.
 
 ## Visualizar
-Veja o projeto completo clicando [aqui]("https://gitgabcode.github.io/mini-projetos-web/exercicio-portfolio/").
-
----
-
+Você pode acessar os projetos através da [página de deploy](https://gitgabcode.github.io/mini-projetos-web/exercicio-portfolio/) 
 Feedback é sempre bem-vindo! 😊
