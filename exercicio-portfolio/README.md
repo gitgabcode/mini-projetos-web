@@ -23,7 +23,7 @@ O portfólio inclui:
 - **style.css**: Estilo e responsividade.
 
 ## Visualizar
-Veja o projeto completo clicando [aqui](#).
+Veja o projeto completo clicando [aqui]("https://gitgabcode.github.io/mini-projetos-web/exercicio-portfolio/").
 
 ---
 
