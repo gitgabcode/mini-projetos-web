@@ -1,0 +1,229 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor_1: #D3D3D3;
+    --cor_2: #4B0082;
+    --cor_3: #FF4500;
+    --cor_4: #4682B4;
+    --cor_5: #6A5ACD;
+    --cor_extra: #FFDAB9;
+    --fonte_titulo: 'Orbitron', sans-serif;
+    --fonte_subtitulo: 'Raleway', sans-serif;
+    --fonte_texto: 'Roboto', sans-serif;
+    --fonte_padrao: Arial, Verdana, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-image: linear-gradient(to bottom, var(--cor_1), var(--cor_2))
+}
+
+body {
+    font-family: var(--fonte_texto), var(--fonte_padrao);
+}
+
+#cabecalho {
+    text-align: center;
+    min-height: 150px;
+
+}
+
+#cabecalho>img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    width: 250px;
+}
+
+nav {
+    display: flex;
+    padding: 10px;
+
+}
+
+nav>ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    text-decoration: none;
+
+    color: var(--cor_2);
+    border-radius: 5px;
+    box-shadow: -2px 1px 6px 1px rgba(0, 0, 0, 0.281);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.nav-link:hover {
+    color: white;
+    transition-duration: 0.8s;
+    background-color: var(--cor_5);
+}
+
+header>h1 {
+    color: var(--cor_2);
+    font-family: var(--fonte_titulo);
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+header>p {
+    font-family: var(--fonte_texto);
+    font-size: 0.9em;
+    color: var(--cor_5);
+}
+
+#virus>img {
+    width: 100%;
+}
+
+
+main {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 800px;
+    min-width: 300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.589);
+}
+
+main p {
+    margin: 15px 0px;
+    text-align: justify;
+    text-indent: 30px;
+    line-height: 1.5;
+}
+
+main strong {
+    color: var(--cor_3);
+    font-weight: bold;
+}
+
+main a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--cor_3);
+    background-color: var(--cor_extra);
+    padding: 3px;
+    border-radius: 3px;
+}
+
+main a:hover {
+    text-decoration: underline;
+}
+
+main h2 {
+    font-family: var(--fonte_subtitulo);
+    color: var(--cor_5);
+}
+
+main h3 {
+    font-family: var(--fonte_subtitulo);
+    padding: 10px;
+    color: var(--cor_5);
+    font-size: 23px;
+}
+
+main h4 {
+    font-size: 18px;
+    color: var(--cor_2);
+
+}
+
+div.video {
+    margin-bottom: 30px;
+    margin: 0px -20px;
+    padding: 20px;
+    padding-bottom: 56%;
+    position: relative;
+}
+
+div.video>iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+
+a.externo::after {
+    content: "\1F517";
+
+}
+
+aside>ul {
+    list-style-position: inside;
+}
+
+#melissa {
+    list-style-type: "\1F9A0\00A0";
+}
+
+#sasser {
+    list-style-type: "\1F4BB\00A0";
+}
+
+#wannacry {
+    list-style-type: "\1F47B";
+}
+
+aside {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#botao_topo {
+    display: block;
+    /* Mostra o botão */
+    position: fixed;
+    /* Fixa o botão na tela */
+    bottom: 20px;
+    /* Distância do fundo */
+    right: 20px;
+    /* Distância da direita */
+    background-color: var(--cor_4);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    /* Começa invisível */
+    transition: 0.5s;
+    /* Transição suave */
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    /* Para o botão ser posicionado em relação ao footer */
+    padding: 10px;
+    color: white;
+}
+
+footer:hover #botao_topo {
+    opacity: 1;
+    /* O botão aparece quando o mouse está sobre o footer */
+}
