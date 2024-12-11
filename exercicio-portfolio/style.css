@@ -80,6 +80,10 @@ main abbr {
     font-weight: bold;
 }
 
+#js-abbr::before{
+    content: "⚡";
+}
+
 #html-abbr::before {
     content: "🟧";
 }
