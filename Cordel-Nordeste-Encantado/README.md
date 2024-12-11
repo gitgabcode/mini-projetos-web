@@ -31,7 +31,7 @@ O site foi desenvolvido para:
 - Imagens temáticas com sombras internas para criar profundidade.
 
 ## Visualizar
-Você pode acessar o site [clicando aqui](#).
+Você pode acessar o site [clicando aqui](https://gitgabcode.github.io/mini-projetos-web/Cordel-Nordeste-Encantado/).
 
 ---
 
