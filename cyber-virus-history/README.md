@@ -13,5 +13,9 @@ Praticar HTML e CSS enquanto compartilho informações sobre vírus famosos.
 - **HTML**: Para a estrutura do site.
 - **CSS**: Para o visual e responsividade.
 
+- ## Acesse o Projeto
+
+Você pode acessar os projetos através da [página de deploy](https://gitgabcode.github.io/mini-projetos-web/cyber-virus-history/).
+
 ## Sobre
 Este projeto é uma prática para melhorar minhas habilidades como desenvolvedor iniciante.
