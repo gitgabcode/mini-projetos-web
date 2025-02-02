@@ -90,7 +90,6 @@ nav {
 
 li {
     list-style: none;
-    
 }
 
 h1 {
@@ -135,7 +134,9 @@ h1 {
     max-width: 300px;
     margin: 20px;
     padding: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;  
+    z-index: 1;           
 }
 
 .image-noticias {
@@ -158,8 +159,8 @@ h1 {
 }
 
 .card-noticias:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2)
+    transform: translateY(-10px);  
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);  
 }
 
 
