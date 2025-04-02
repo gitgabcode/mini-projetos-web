@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(to right, #FFE7D1, #FFF2E5);
+    min-height: 100vh;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px;
+    border-bottom: 1px solid black;
+}
+
+header #logo {
+    font-size: 40px;
+    font-weight: 900;
+    margin: 10px;
+    transition: transform 0.3s ease;
+}
+
+header a {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    transition: box-shadow 0.3s ease;
+    color: black;
+}
+
+header nav {
+    margin: 10px;
+}
+
+header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+
+}
+
+header li {
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+header button {
+    margin: 10px;
+    font-size: 14px;
+    padding: 5px 15px;
+    background-color: #ED4D1B;
+    font-weight: bold;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.479);
+    transition: box-shadow 0.3s ease;
+}
+
+header #logo:hover {
+    transform: scale(1.1) rotate(5deg) translate(10px, 0);
+    cursor: pointer;
+    color: #ED4D1B;
+}
+
+header button:hover {
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.705);
+    cursor: pointer;
+}
+
+header a:hover,
+header li:hover {
+    transform: scale(1.1);
+    color: #ED4D1B;
+}
+
+
+#container-inicio {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 10px;
+    border-bottom: 1px solid black;
+    margin-bottom: 50px;
+}
+
+#container-filho-inicio {
+    min-width: 100px;
+    max-width: 300px;
+}
+
+#container-filho-inicio h1 {
+    font-size: 3.7em;
+    font-weight: 900;
+
+}
+
+#container-filho-inicio strong {
+    color: #ED4D1B;
+}
+
+#container-filho-inicio p {
+    line-height: 25px;
+    font-weight: bold;
+    padding: 15px 0px;
+}
+
+#container-filho-inicio button {
+    padding: 10px;
+    font-size: 15px;
+    background-color: #ED4D1B;
+    font-weight: bold;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.479);
+    transition: box-shadow 0.3s ease;
+}
+
+#container-filho-inicio button:hover,
+#mais-cursos button:hover, #container-formulario button:hover {
+    box-shadow: 6px 8px 12px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+#container-img {
+    min-width: 100px;
+    max-width: 800px;
+    height: auto;
+    width: 100%;
+}
+
+#container-img>img {
+    height: auto;
+    max-width: 100%;
+    min-width: 100px;
+    width: 100%;
+}
+
+#container-card {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: auto;
+}
+
+#container-card H2,
+img,
+p {
+    margin: 10px;
+}
+
+.card {
+    aspect-ratio: 272 / 306;
+    width: 100%;
+    max-width: 272px;
+    height: auto;
+    border: 1px solid black;
+    max-height: 306px;
+    overflow: auto;
+    background-color: #FF9A3C;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.644);
+    margin: 5px;
+}
+
+#card-piano,
+#card-sax {
+    transform: translateY(-20px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.596);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ED4D1B;
+    margin-top: 40px;
+}
+
+#outros-cursos,
+footer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: auto;
+    border-bottom: 1px solid black;
+}
+
+#mais-cursos {
+    text-align: center;
+    font-size: 64px;
+}
+
+#mais-cursos button {
+    background-color: #ED4D1B;
+    padding: 10px 20px;
+    font-weight: bold;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.479);
+    transition: box-shadow 0.3s ease;
+    font-size: 15px;
+    margin-bottom: 50px;
+}
+
+#logo-footer {
+    font-size: 40px;
+    font-weight: 900;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    padding: 5px;
+}
+
+#restante-logo-footer {
+    font-size: 20px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    padding: 5px;
+}
+
+#logo-footer:hover,
+#restante-logo-footer:hover {
+    transform: scale(1.1) rotate(5deg) translate(10px, 0);
+    cursor: pointer;
+    color: #ED4D1B;
+}
+
+#container-logo-footer{
+    min-width: 100px;
+    max-width: 50vw;
+    height: auto;
+}
+
+#container-nav-footer{
+    display: flex;
+    min-width: 100px;
+    max-width: 33;
+    height: auto;
+}
+
+#container-nav-footer nav ul{
+    list-style-type: none;
+    list-style: none;
+    display: flex;
+    flex-direction: column; /* Organiza os itens na vertical */
+    height: 100%;
+
+}
+#container-nav-footer li{
+    padding: 10px;
+    flex: 1;  
+    display: flex;
+    justify-content: center;  
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    background-color: #FF9A3C;
+    border: 1px solid white;
+}
+
+#container-nav-footer a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#container-formulario p{
+    font-size: 24px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+#container-formulario {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#container-formulario p {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#container-formulario label {
+    font-weight: bold;
+    color: black;
+}
+
+#email {
+    padding: 8px;
+    border: 1px solid #ED4D1B;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 300px;
+}
+
+#container-formulario button {
+    color: black;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #ED4D1B;
+    font-weight: bold;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.479);
+    transition: box-shadow 0.3s ease;
+    margin: 10px;
+}
+
+
+
