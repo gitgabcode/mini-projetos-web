@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Idade</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/homem-aranha.png" type="image/x-icon">
+</head>
+
+<body>
+    <h1>Spider-Verificador de Idade</h1>
+    <div id="container-pai">
+        <div id="container">
+            <div id="container-nascimento">
+                <label for="nascimento"><strong>Ano de nascimento</strong></label>
+                <input type="number" name="nascimento" id="nascimento" placeholder="Somente o ANO">
+            </div>
+            <div id="container-sexo">
+                <span><strong>Sexo</strong>:</span>
+                <label>
+                    <input type="radio" name="sexo" id="masculino" value="M"> Masculino
+                </label>
+                <label>
+                    <input type="radio" name="sexo" id="feminino" value="F"> Feminino
+                </label>
+            </div>
+            <button id="verificador" type="button">Verificar</button>
+            <div id="res">Preencha os dados acima para ver o resultado!</div>
+            <img id="img" src="img/Spiderman.jpg" alt="Pessoa vestida de homem aranha">
+        </div>
+    </div>
+
+    <script>
+        var verificar = document.getElementById('verificador');
+        var res = document.getElementById('res');
+        var img = document.getElementById('img');
+        const som = document.getElementById('somSpider');
+
+
+        verificar.addEventListener('click', function () {
+            var nascimento = document.getElementById('nascimento').value;
+            var anoAtual = new Date().getFullYear();
+            var idade = anoAtual - Number(nascimento);
+            var sexo = '';
+
+            if (document.getElementById('feminino').checked) {
+                sexo = 'F';
+            } else if (document.getElementById('masculino').checked) {
+                sexo = 'M';
+            }
+
+            if (nascimento === '' || idade < 0 || idade > 120) {
+                alert("Por favor, insira um ano de nascimento válido.");
+                return;
+            }
+
+            if (sexo === ''){
+                 alert("Por favor, insira seu sexo.");
+                 return;
+            }
+
+
+            // Bebe:
+            if (idade < 3 && sexo === 'F') {
+                img.src = "img/bebe-mulher.jpg";
+                res.innerHTML = `Com só ${idade} aninho(s), mini Aranha detectada! Fralda hoje, cidade pra salvar amanhã.`;
+            } else if (idade < 3 && sexo === 'M') {
+                img.src = "img/bebe-homem.jpg";
+                res.innerHTML = `Com apenas ${idade} aninho(s), você ainda nem anda direito e já quer soltar teia? Calma, pequeno Aranhinha!`;
+            }
+            // Crianaça
+            else if (idade < 12 && sexo === 'F') {
+                img.src = "img/crianca-mulher.jpg";
+                res.innerHTML = `Você tem ${idade} anos e já tá pronta pra escalar sofá e salvar o gatinho do vizinho, Aranha mirim!`;
+            }
+            else if (idade < 12 && sexo === 'M') {
+                img.src = "img/crianca-homem.jpg";
+                res.innerHTML = `Com ${idade} anos, o Jovem Aranha do parquinho chegou! Teia de chiclete e missão: não sujar a roupa.`;
+            }
+            //Adolescente 
+            else if (idade < 18 && sexo === 'F') {
+                img.src = "img/adolescente-mulher.jpg";
+                res.innerHTML = `Com ${idade} anos, você tá na fase: drama, selfie e teia nos stories. A Aranha adolescente chegou!`;
+            }
+            else if (idade < 18 && sexo === 'M') {
+                img.src = "img/adolescente-homem.jpg";
+                res.innerHTML = `${idade} anos nas costas e você tá naquela fase: velho demais pro recreio, novo demais pros Vingadores…`;
+            }
+            //Adulto
+            else if (idade < 60 && sexo === 'F') {
+                img.src = "img/adulta-mulher.jpg";
+                res.innerHTML = `Com ${idade} anos, você é a Aranha de salto alto! Trabalho de dia, salva o mundo de noite.`;
+            }
+            else if (idade < 60 && sexo === 'M') {
+                img.src = "img/adulto-homem.jpg"
+                res.innerHTML = `Com ${idade} anos, você é o Aranha da quebrada! Já tá pagando boleto e lutando contra vilão e inflação.`;
+            }
+            //Idoso
+            else if (idade < 120 && sexo === 'F') {
+                img.src = "img/idosa-mulher.png";
+                res.innerHTML = `Com ${idade} anos, você é a Aranha Master! Experiência, estilo e uma teia que pega até conversa fiada.`;
+            }
+            else if (idade < 120 && sexo === 'M') {
+                img.src = "img/idoso-homem.jpg"
+                 res.innerHTML = `${idade} anos de teia nas costas! Você é o Aranha aposentado. Ainda solta teia… só que agora é na lombar.`;
+            }
+
+        });
+    </script>
+</body>
+
+</html>
