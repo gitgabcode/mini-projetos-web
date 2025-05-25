@@ -1,6 +1,6 @@
 # Mini Projetos Web
 
-Repositório destinado a armazenar os mini projetos que desenvolvo durante meus estudos de HTML, CSS e outras tecnologias web. Cada projeto inclui o código-fonte e o link para o deploy, permitindo que você visualize os projetos em funcionamento.
+Repositório destinado a armazenar os mini projetos que desenvolvo durante meus estudos de HTML, CSS, JS e outras tecnologias web. Cada projeto inclui o código-fonte e o link para o deploy, permitindo que você visualize os projetos em funcionamento.
 
 ## Estrutura do Repositório
 
