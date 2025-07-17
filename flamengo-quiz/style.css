@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Raleway:wght@700&family=Source+Sans+Pro:wght@600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body, html {
+    width: 100vw;
+    min-height: 100vh;  
+    overflow-y: auto; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #afaaaa;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+}
+
+main {
+    width: 100%;
+    min-height: 100vh;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;  
+}
+
+h1 {
+    max-width: 90vw; /* não deixe ele maior que a largura da tela */
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* fonte responsiva */
+    word-wrap: break-word; /* quebra palavra se precisar */
+    text-align: center;
+    color: #bf1e2e;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px #bf1e2e;
+    padding: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    background-color: #c7c6c648;
+    border-radius: 5px;
+}
+
+#containerPrincipal {
+    width: 90%;
+    display: flex;
+    background-color: #222222;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.26);
+    flex-direction: column;
+    box-shadow: 0 0 10px #bf1e2e, inset 0 0 20px #7a121b;
+    padding: 10px;
+    background-image: url(img/flamengo-15.png);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    background-size: 150px auto;
+}
+
+
+h2 {
+    color: #f5f5f5;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.377);
+    padding: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
+
+#alternativas {
+    display: flex;
+    padding: 5px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#alternativas button {
+    background-color: #bf1e2e;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px #bf1e2e;
+}
+
+span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    background: #fff;
+    color: #bf1e2e;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+
+#navegacao {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#navegacao button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 0 10px #bf1e2e;
+    font-weight: 700;
+}
+
+/*classe pra mudar estilo do H2 no gabarito */
+.texto-gabarito {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+#voltar {
+    background-color: #e03c3c;
+}
+
+
+#proximo {
+    background-color: #e03c3c;
+}
+
+/* Estilo do resultado mas iniciando com display none, so sendo chamado dps no js */
+#res {
+    display: none;
+    max-width: 650px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+    text-align: center;
+}
+
+#textoResultado {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #b22222;
+}
+
+#imagemResultado {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#res button {
+    background-color: #b22222;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Botão de refazer o quizz, mas quando mostrado dentro do gabarito */
+#refazerGabarito {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #c70000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Container do gabarito - lista das perguntas e respostas */
+#gabarito {
+    max-width: 650px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    padding: 20px 25px;
+    margin: 20px auto 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+
+#gabarito p {
+    margin-bottom: 15px;
+}
+
+
+#gabarito em {
+    font-style: italic;
+    color: #666;
+    display: block;
+    margin-top: 5px;
+}
+
+/*   um scroll personalizado para Chrome */
+#gabarito::-webkit-scrollbar {
+    width: 8px;
+}
+
+#gabarito::-webkit-scrollbar-thumb {
+    background-color: #b22222;
+    border-radius: 10px;
+}
+
+
+/* Classe para destacar a alternativa selecionada */
+#alternativas button.selecionada {
+    background-color: #fff;
+    color: #bf1e2e;
+    border: 2px solid #bf1e2e;
+    font-weight: bold;
+    box-shadow: 0 0 10px #bf1e2e;
+}
+
+.alerta {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    text-align: center;
+}
+
+.alerta button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: crimson;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#tempo {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.6rem; /* menor fonte */
+    font-weight: 700;
+    color: #E63946;
+    background-color: #F1FAEE;
+    width: 50px;      /* menor largura */
+    height: 50px;     /* menor altura */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2.5px solid #E63946; /* borda um pouco mais fina */
+    box-shadow: 0 0 6px rgba(230, 57, 70, 0.6);
+    user-select: none;
+    margin: 8px auto;
+
+    transition: color 0.3s, border-color 0.3s;
+}
+
+#tempo.tempo-baixo {
+    color: #F1FAEE;
+    background-color: #E63946;
+    border-color: #A62828;
+    box-shadow: 0 0 10px rgba(166, 40, 40, 0.9);
+}
+
+
+/* Container do bloco de compartilhar resultado */
+#compartilharResultado {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: #25D366;
+    box-shadow: 0 4px 12px rgba(0, 128, 0, 0.4);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
+}
+
+#mensagemCompartilhar {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+#linkWhatsApp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #128C7E;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(18, 140, 126, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+#linkWhatsApp::before {
+    content: "📲";
+    margin-right: 12px;
+    font-size: 1.3rem;
+}
+
+#linkWhatsApp:hover {
+    background-color: #0b6a59;
+    box-shadow: 0 8px 16px rgba(11, 106, 89, 0.8);
+    text-decoration: none;
+    color: #e0ffe0;
+}
+
+
+@media (min-width: 600px) {
+    #containerPrincipal {
+        width: 60%;
+        margin: 0 auto;
+        padding: 24px;
+        background-image: url('img/flamengo-15.png'), url('img/Wallpaper_flamengo-removebg-preview.png');
+        background-repeat: no-repeat, no-repeat;
+        background-position: calc(100% - 20px), center;
+        background-size: 200px auto, 300px auto;
+    }
+
+
+    #alternativas {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #alternativas button,
+    #navegacao button {
+        font-size: 1.2rem;
+        padding: 18px 32px;
+        transition: background-color 0.5s ease;
+        cursor: pointer;
+    }
+
+    #alternativas button:hover,
+    #proximo:hover,
+    #voltar:hover {
+        background-color: #ebe3e3;
+        color: #bf1e2e;
+    }
+
+}

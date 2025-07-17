@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flamengo Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+</head>
+
+<body>
+    <main>
+        <h1>Flamengo Quiz: Raiz, Modinha, Quase Mengo ou Velha Guarda?</h1>
+        <section id="containerPrincipal">
+            <h2 id="pergunta">Quem é o maior ídolo do Flamengo de todos os tempos?</h2>
+            <div id="alternativas">
+                <button type="button" id="alternativaA"><span>A)</span> Zico</button>
+                <button type="button" id="alternativaB"><span>B)</span> Gabigol</button>
+                <button type="button" id="alternativaC"><span>C)</span> Bruno Henrique</button>
+                <button type="button" id="alternativaD"><span>D)</span> De Arrascaeta</button>
+            </div>
+            <div id="navegacao">
+                <button type="button" id="voltar">Voltar</button>
+                <button type="button" id="proximo">Proximo</button>
+            </div>
+        </section>
+        <div id="res">
+            <h2 id="textoResultado">Você é...</h2>
+            <img id="imagemResultado" src="img/quase_mengo.jpeg" alt="Imagem do resultado" style="max-width: 300px;">
+            <br>
+            <button onclick="location.reload()">Refazer o quiz</button>
+            <button id="mostrar_gabarito" type="button">Ver gabarito</button>
+        </div>
+
+        <div id="gabarito" style="display: none;">
+            <h2 id="texto-gabarito">Gabarito</h2>
+            <div id="listaGabarito"></div>
+            <button id="refazerGabarito" onclick="location.reload()">Refazer o quiz</button>
+        </div>
+
+        <div id="alertaPersonalizado" class="alerta">
+            <p id="mensagemAlerta"></p>
+            <button onclick="fecharAlerta()">Fechar</button>
+        </div>
+
+        <div id="temporizador">
+            <span id="tempo">60</span>
+        </div>
+
+        <div id="compartilharResultado" style="display:none;">
+            <p id="mensagemCompartilhar"></p>
+            <a id="linkWhatsApp" href="#" target="_blank">Compartilhar no WhatsApp</a>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
