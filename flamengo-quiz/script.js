@@ -295,22 +295,27 @@ function mostrarResultado() {
     let veredito = "";
 
     // Define o veredito final baseado no número e tipo de acertos do usuário
+    // Se acertou todas as 8 perguntas, é o nível máximo: "Raiz"
     if (totalAcertos === 8) {
-        // Se acertou todas as 8 perguntas, é "Raiz"
         veredito = "Raiz";
-    } else if (acertosVelhaGuarda > acertosRecentes && totalAcertos <= 5) {
-        // Se a maioria dos acertos forem da Velha Guarda e total de acertos for até 5
-        veredito = "Velha Guarda";
-    } else if (acertosRecentes > acertosVelhaGuarda && totalAcertos <= 5) {
-        // Se a maioria dos acertos forem da Modinha e total de acertos for até 5
-        veredito = "Modinha";
+
+        // Se acertou 2 ou menos, conhecimento muito baixo: "Vascaíno"
     } else if (totalAcertos <= 2) {
-        // Se acertou 2 ou menos no total, tem conhecimento muito baixo
         veredito = "Vascaíno";
+
+        // Se acertou mais perguntas da Velha Guarda do que da Modinha, então é "Velha Guarda"
+    } else if (acertosVelhaGuarda > acertosRecentes) {
+        veredito = "Velha Guarda";
+
+        // Se acertou mais perguntas da Modinha do que da Velha Guarda, então é "Modinha"
+    } else if (acertosRecentes > acertosVelhaGuarda) {
+        veredito = "Modinha";
+
+        // Se empatou em número de acertos entre Velha Guarda e Modinha, é "Quase Mengo"
     } else {
-        // Para todos os outros casos (entre 3 e 7 acertos sem maioria clara)
         veredito = "Quase Mengo";
     }
+
 
 
     //Variavel pra ir criando a lista 
