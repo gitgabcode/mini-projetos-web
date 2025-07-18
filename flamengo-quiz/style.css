@@ -148,9 +148,8 @@ span {
 #res {
     display: none;
     max-width: 650px;
-    margin: 40px auto;
     background-color: #fff;
-    padding: 25px 30px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
