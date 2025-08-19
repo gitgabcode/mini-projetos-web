@@ -123,7 +123,7 @@ ppa/
 **Gabriel Marcelino**  
 *Estagiário de Compras - Grupo CSC*
 
-- 📧 Email: [gabriel.marcelino@grupocsc.com.br]
+- 📧 Email: [gabrieljf184@gmail.com]
 - 💼 LinkedIn: [gabriel-marcelino1](https://www.linkedin.com/in/gabriel-marcelino1/)
 - 🐱 GitHub: [gitgabcode](https://github.com/gitgabcode)
 
