@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora PPA - Programa de Premiação dos Almoxarifados</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Calculadora PPA</h1>
+            <p>Programa de Premiação dos Almoxarifados - Grupo CSC</p>
+            <div class="header-info">
+                <span class="badge">Avaliação Trimestral</span>
+                <span class="badge">Sistema de Classificação</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Seção de informações do almoxarifado -->
+            <div class="almoxarifado-info">
+                <h2>📋 Dados do Almoxarifado</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="codigo-almoxarifado">Código do Almoxarifado:</label>
+                        <input type="text" id="codigo-almoxarifado" placeholder="Ex: ALM001">
+                    </div>
+                    <div class="form-group">
+                        <label for="trimestre">Trimestre:</label>
+                        <select id="trimestre">
+                            <option value="1">1º Trimestre 2025</option>
+                            <option value="2">2º Trimestre 2025</option>
+                            <option value="3">3º Trimestre 2025</option>
+                            <option value="4">4º Trimestre 2025</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seletor de Modo -->
+            <div class="modo-selector">
+                <h2>🎯 Escolha sua Visualização</h2>
+                <div class="modo-buttons">
+                    <button class="modo-btn active" onclick="trocarModo('compras', this)">🛒 Compras</button>
+                    <button class="modo-btn" onclick="trocarModo('estoque', this)">📦 Estoque</button>
+                    <button class="modo-btn" onclick="trocarModo('apontamentos', this)">📊 Apontamentos</button>
+                    <button class="modo-btn" onclick="trocarModo('orcamento', this)">💰 Orçamento</button>
+                    <button class="modo-btn" onclick="trocarModo('geral', this)">🏆 Visão Geral</button>
+                </div>
+            </div>
+
+            <!-- CARD COMPRAS -->
+            <div class="setor-card" id="card-compras">
+                <div class="card-header compras">
+                    <h2>🛒 Setor de Compras</h2>
+                    <div class="nota-setor">
+                        <span class="label">Nota do Setor:</span>
+                        <span class="nota-valor" id="nota-compras">0.00</span>
+                        <span class="nota-max">/10.00</span>
+                    </div>
+                </div>
+                
+                <div class="indicador-card">
+                    <h3>Compras de Contrato (60% do grupo)</h3>
+                    <p class="indicador-desc">Verificar se produtos foram comprados corretamente dentro do processo ESC</p>
+                    
+                    <div class="indicador-inputs">
+                        <div class="input-pair">
+                            <label>Total Contrato:</label>
+                            <input type="number" id="compras-total-contrato" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="input-pair">
+                            <label>Compra Errada:</label>
+                            <input type="number" id="compras-compra-errada" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="input-pair">
+                            <label>Req. Avulso:</label>
+                            <input type="number" id="compras-req-avulso" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="resultado-indicador" id="compras-resultado">0%</div>
+                    </div>
+
+                    <div class="tabela-pontuacao">
+                        <h4>📊 Tabela de Pontuação:</h4>
+                        <table>
+                            <tr><td>0% a 5% de erro</td><td>100 pontos</td></tr>
+                            <tr><td>5% a 10% de erro</td><td>75 pontos</td></tr>
+                            <tr><td>10% a 15% de erro</td><td>50 pontos</td></tr>
+                            <tr><td>Acima de 15% de erro</td><td>0 pontos</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="peso-info">Peso no PPA Final: <strong>25%</strong></div>
+                    <div class="contribuicao">Contribuição: <span id="contribuicao-compras">0.00</span> pontos</div>
+                </div>
+            </div>
+
+            <!-- CARD ESTOQUE -->
+            <div class="setor-card" id="card-estoque" style="display: none;">
+                <div class="card-header estoque">
+                    <h2>📦 Setor de Estoque</h2>
+                    <div class="nota-setor">
+                        <span class="label">Nota do Setor:</span>
+                        <span class="nota-valor" id="nota-estoque">0.00</span>
+                        <span class="nota-max">/10.00</span>
+                    </div>
+                </div>
+                
+                <div class="indicadores-grid">
+                    <div class="indicador-card">
+                        <h3>Estoque Parado +90 dias (25%)</h3>
+                        <p class="indicador-desc">Peças sem saída há mais de 90 dias</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total Estoque (R$):</label>
+                                <input type="number" id="estoque-total-estoque" min="0" step="0.01" oninput="calcularEstoque()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Estoque Parado (R$):</label>
+                                <input type="number" id="estoque-estoque-parado" min="0" step="0.01" oninput="calcularEstoque()">
+                            </div>
+                            <div class="resultado-indicador" id="estoque-resultado-parado">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Ajuste de Saldo (25%)</h3>
+                        <p class="indicador-desc">Diferenças entre estoque físico e sistema</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total Estoque (R$):</label>
+                                <input type="number" id="estoque-total-ajuste" min="0" step="0.01" oninput="calcularEstoque()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Total Ajuste (R$):</label>
+                                <input type="number" id="estoque-total-ajuste-valor" min="0" step="0.01" oninput="calcularEstoque()">
+                            </div>
+                            <div class="resultado-indicador" id="estoque-resultado-ajuste">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Quebra de Diesel (50%)</h3>
+                        <p class="indicador-desc">Quebras dentro da tolerância (-3% a +3%)</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total de Quebras:</label>
+                                <input type="number" id="estoque-total-quebras" min="0" oninput="calcularEstoque()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Quebras no Limite:</label>
+                                <input type="number" id="estoque-quebras-limite" min="0" oninput="calcularEstoque()">
+                            </div>
+                            <div class="resultado-indicador" id="estoque-resultado-quebra">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="peso-info">Peso no PPA Final: <strong>25%</strong></div>
+                    <div class="contribuicao">Contribuição: <span id="contribuicao-estoque">0.00</span> pontos</div>
+                </div>
+            </div>
+
+            <!-- CARD APONTAMENTOS -->
+            <div class="setor-card" id="card-apontamentos" style="display: none;">
+                <div class="card-header apontamentos">
+                    <h2>📊 Setor de Apontamentos</h2>
+                    <div class="nota-setor">
+                        <span class="label">Nota do Setor:</span>
+                        <span class="nota-valor" id="nota-apontamentos">0.00</span>
+                        <span class="nota-max">/10.00</span>
+                    </div>
+                </div>
+
+                <div class="indicadores-grid">
+                    <div class="indicador-card">
+                        <h3>Notas no Prazo 10 dias (15%)</h3>
+                        <p class="indicador-desc">Notas lançadas em até 10 dias da emissão</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total de Notas:</label>
+                                <input type="number" id="apontamentos-total-notas" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Notas no Prazo:</label>
+                                <input type="number" id="apontamentos-notas-prazo" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="resultado-indicador" id="apontamentos-resultado-notas">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Peças Aplicadas (30%)</h3>
+                        <p class="indicador-desc">Aplicação correta de peças nos veículos</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total de Aplicações:</label>
+                                <input type="number" id="apontamentos-total-aplicacoes" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Aplicações Corretas:</label>
+                                <input type="number" id="apontamentos-aplicacoes-corretas" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="resultado-indicador" id="apontamentos-resultado-aplicadas">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Peças Retiradas 60% Abaixo Km (30%)</h3>
+                        <p class="indicador-desc">Controle de retirada prematura de peças</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Deveria Trocar:</label>
+                                <input type="number" id="apontamentos-deveria-trocar" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Total Aplicado:</label>
+                                <input type="number" id="apontamentos-total-aplicado" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Aplicado Abaixo 60%:</label>
+                                <input type="number" id="apontamentos-aplicado-abaixo" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="resultado-indicador" id="apontamentos-resultado-retiradas">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Movimentações Pneus (10%)</h3>
+                        <p class="indicador-desc">Posições movimentadas nos últimos 24 meses</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total de Posições:</label>
+                                <input type="number" id="apontamentos-total-posicoes" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Posições Movimentadas:</label>
+                                <input type="number" id="apontamentos-posicoes-movimentadas" min="0" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="resultado-indicador" id="apontamentos-resultado-pneus">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="indicador-card">
+                        <h3>Saída Frota Errada (15%)</h3>
+                        <p class="indicador-desc">Aplicação correta para frota específica</p>
+                        
+                        <div class="indicador-inputs">
+                            <div class="input-pair">
+                                <label>Total Saída Frota (R$):</label>
+                                <input type="number" id="apontamentos-total-saida-frota" min="0" step="0.01" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="input-pair">
+                                <label>Frota Certa (R$):</label>
+                                <input type="number" id="apontamentos-frota-certa" min="0" step="0.01" oninput="calcularApontamentos()">
+                            </div>
+                            <div class="resultado-indicador" id="apontamentos-resultado-frota">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="peso-info">Peso no PPA Final: <strong>40%</strong></div>
+                    <div class="contribuicao">Contribuição: <span id="contribuicao-apontamentos">0.00</span> pontos</div>
+                </div>
+            </div>
+
+            <!-- CARD ORÇAMENTO -->
+            <div class="setor-card" id="card-orcamento" style="display: none;">
+                <div class="card-header orcamento">
+                    <h2>💰 Setor de Orçamento</h2>
+                    <div class="nota-setor">
+                        <span class="label">Nota do Setor:</span>
+                        <span class="nota-valor" id="nota-orcamento">0.00</span>
+                        <span class="nota-max">/10.00</span>
+                    </div>
+                </div>
+                
+                <div class="indicador-card">
+                    <h3>Orçamento vs Realizado (100%)</h3>
+                    <p class="indicador-desc">Comparação entre valor orçado e realizado</p>
+                    
+                    <div class="indicador-inputs">
+                        <div class="input-pair">
+                            <label>Orçado (R$):</label>
+                            <input type="number" id="orcamento-orcado" min="0" step="0.01" oninput="calcularOrcamento()">
+                        </div>
+                        <div class="input-pair">
+                            <label>Realizado (R$):</label>
+                            <input type="number" id="orcamento-realizado" min="0" step="0.01" oninput="calcularOrcamento()">
+                        </div>
+                        <div class="resultado-indicador" id="orcamento-resultado">0%</div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="peso-info">Peso no PPA Final: <strong>10%</strong></div>
+                    <div class="contribuicao">Contribuição: <span id="contribuicao-orcamento">0.00</span> pontos</div>
+                </div>
+            </div>
+
+            <!-- CARD VISÃO GERAL -->
+            <div class="setor-card" id="card-geral" style="display: none;">
+                <div class="card-header geral">
+                    <h2>🏆 Visão Geral - PPA Completo</h2>
+                    <div class="nota-setor">
+                        <span class="label">Nota Final:</span>
+                        <span class="nota-valor final" id="nota-final">0.00</span>
+                        <span class="nota-max">/10.00</span>
+                    </div>
+                </div>
+
+                <div class="resumo-grupos">
+                    <div class="grupo-resumo">
+                        <div class="grupo-nome">🛒 Compras</div>
+                        <div class="grupo-nota"><span id="resumo-compras">0.00</span>/10</div>
+                        <div class="grupo-peso">25%</div>
+                        <div class="grupo-contribuicao"><span id="resumo-contrib-compras">0.00</span> pts</div>
+                    </div>
+                    <div class="grupo-resumo">
+                        <div class="grupo-nome">📦 Estoque</div>
+                        <div class="grupo-nota"><span id="resumo-estoque">0.00</span>/10</div>
+                        <div class="grupo-peso">25%</div>
+                        <div class="grupo-contribuicao"><span id="resumo-contrib-estoque">0.00</span> pts</div>
+                    </div>
+                    <div class="grupo-resumo">
+                        <div class="grupo-nome">📊 Apontamentos</div>
+                        <div class="grupo-nota"><span id="resumo-apontamentos">0.00</span>/10</div>
+                        <div class="grupo-peso">40%</div>
+                        <div class="grupo-contribuicao"><span id="resumo-contrib-apontamentos">0.00</span> pts</div>
+                    </div>
+                    <div class="grupo-resumo">
+                        <div class="grupo-nome">💰 Orçamento</div>
+                        <div class="grupo-nota"><span id="resumo-orcamento">0.00</span>/10</div>
+                        <div class="grupo-peso">10%</div>
+                        <div class="grupo-contribuicao"><span id="resumo-contrib-orcamento">0.00</span> pts</div>
+                    </div>
+                </div>
+
+                <div class="premiacao-geral" id="premiacao-geral">
+                    <h3>Status da Premiação</h3>
+                    <div id="status-premiacao-geral">Preencha os setores para ver o resultado</div>
+                </div>
+
+                <div class="chart-container-geral">
+                    <canvas id="ppaChartGeral"></canvas>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="acoes">
+                <button onclick="limparSetor()" class="btn-limpar" id="btn-limpar">🗑️ Limpar Setor</button>
+                <button onclick="gerarRelatorioSetor()" class="btn-relatorio" id="btn-relatorio">📄 Gerar Relatório</button>
+            </div>
+        </main>
+        
+        <!-- Créditos -->
+        <footer class="creditos">
+            <div class="creditos-content">
+                <p>💼 Desenvolvido por <strong>Gabriel Marcelino</strong></p>
+                <p>🎓 Estagiário de Compras - Grupo CSC</p>
+                <p>📅 2025 - Calculadora PPA v2.0</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
