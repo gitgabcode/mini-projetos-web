@@ -67,49 +67,76 @@ function trocarModo(modo, elemento = null) {
 function calcularCompras() {
     console.log('🛒 Calculando Compras...');
     
+    // === INDICADOR 1: COMPRAS DE CONTRATO (60% do grupo) ===
     const totalContrato = Math.max(0, parseFloat(document.getElementById('compras-total-contrato').value) || 0);
     const compraErrada = Math.max(0, parseFloat(document.getElementById('compras-compra-errada').value) || 0);
     const reqAvulso = Math.max(0, parseFloat(document.getElementById('compras-req-avulso').value) || 0);
     
-    // Validações lógicas
-    if (compraErrada > totalContrato) {
-        document.getElementById('compras-resultado').textContent = 'ERRO: Compra errada > Total';
-        return;
-    }
-    if (reqAvulso > totalContrato) {
-        document.getElementById('compras-resultado').textContent = 'ERRO: Req. avulso > Total';
-        return;
-    }
-    if ((compraErrada + reqAvulso) > totalContrato) {
-        document.getElementById('compras-resultado').textContent = 'ERRO: Soma dos erros > Total';
-        return;
-    }
-    
-    let pontuacao = 0;
+    let notaContrato = 0;
+    let pontuacaoContrato = 0;
     let percErro = 0;
     
-    if (totalContrato > 0) {
-        percErro = ((compraErrada + reqAvulso) / totalContrato) * 100;
+    // Validações lógicas para Contrato
+    if (compraErrada > totalContrato || reqAvulso > totalContrato || (compraErrada + reqAvulso) > totalContrato) {
+        document.getElementById('compras-resultado').textContent = 'ERRO: Valores inválidos';
+    } else {
+        if (totalContrato > 0) {
+            percErro = ((compraErrada + reqAvulso) / totalContrato) * 100;
+            
+            // Tabela de pontuação para contratos
+            if (percErro <= 5) {
+                pontuacaoContrato = 100;
+            } else if (percErro <= 10) {
+                pontuacaoContrato = 75;
+            } else if (percErro <= 15) {
+                pontuacaoContrato = 50;
+            } else {
+                pontuacaoContrato = 0;
+            }
+        }
         
-        // Tabela de pontuação
-        if (percErro <= 5) {
-            pontuacao = 100;
-        } else if (percErro <= 10) {
-            pontuacao = 75;
-        } else if (percErro <= 15) {
-            pontuacao = 50;
+        document.getElementById('compras-resultado').textContent = `${pontuacaoContrato} pontos (${percErro.toFixed(1)}% erro)`;
+        notaContrato = (pontuacaoContrato / 100) * 10;
+    }
+    
+    // === INDICADOR 2: ADERÊNCIA AO PROCESSO (40% do grupo) ===
+    const totalCompras = Math.max(0, parseFloat(document.getElementById('aderencia-total-compras').value) || 0);
+    const comprasComCotacoes = Math.max(0, parseFloat(document.getElementById('aderencia-com-cotacoes').value) || 0);
+    const pedidosFormalizados = Math.max(0, parseFloat(document.getElementById('aderencia-pedidos-formalizados').value) || 0);
+    
+    let notaAderencia = 0;
+    let percCotacoes = 0;
+    let percFormalizacao = 0;
+    
+    // Validações lógicas para Aderência
+    if (comprasComCotacoes > totalCompras || pedidosFormalizados > totalCompras) {
+        document.getElementById('aderencia-resultado').textContent = 'ERRO: Valores inválidos';
+    } else {
+        if (totalCompras > 0) {
+            percCotacoes = (comprasComCotacoes / totalCompras) * 100;
+            percFormalizacao = (pedidosFormalizados / totalCompras) * 100;
+            
+            // Média das duas métricas (50% cada)
+            const mediaAderencia = (percCotacoes + percFormalizacao) / 2;
+            notaAderencia = (mediaAderencia / 100) * 10;
+            
+            document.getElementById('aderencia-resultado').textContent = 
+                `${mediaAderencia.toFixed(1)}% (Cotações: ${percCotacoes.toFixed(1)}%, Formalização: ${percFormalizacao.toFixed(1)}%)`;
         } else {
-            pontuacao = 0;
+            document.getElementById('aderencia-resultado').textContent = '0%';
         }
     }
     
-    document.getElementById('compras-resultado').textContent = `${pontuacao} pontos (${percErro.toFixed(1)}% erro)`;
+    // === CÁLCULO FINAL DO SETOR COMPRAS ===
+    // Contrato (60%) + Aderência (40%)
+    const notaFinalCompras = (notaContrato * 0.60) + (notaAderencia * 0.40);
     
-    const notaSetor = (pontuacao / 100) * 10;
-    notasSetores.compras = notaSetor;
+    notasSetores.compras = notaFinalCompras;
     
-    document.getElementById('nota-compras').textContent = notaSetor.toFixed(2);
-    document.getElementById('contribuicao-compras').textContent = (notaSetor * configPPA.pesos.compras).toFixed(2);
+    document.getElementById('nota-compras').textContent = notaFinalCompras.toFixed(2);
+    document.getElementById('contribuicao-compras').textContent = (notaFinalCompras * configPPA.pesos.compras).toFixed(2);
+    
+    console.log(`📊 Compras - Contrato: ${notaContrato.toFixed(2)} (60%) + Aderência: ${notaAderencia.toFixed(2)} (40%) = ${notaFinalCompras.toFixed(2)}`);
 }
 
 // === ESTOQUE ===
@@ -613,7 +640,8 @@ function gerarExcelCompleto(codigo, trimestre) {
         ['Setor', 'Indicador', 'Resultado', 'Peso no Grupo', 'Nota Final Setor', 'Status'],
         
         // COMPRAS
-        ['COMPRAS', 'Compras de Contrato', document.getElementById('compras-resultado')?.textContent || '0 pontos', '60%', notasSetores.compras.toFixed(2), obterStatusIndicador(notasSetores.compras)],
+        ['COMPRAS', 'Compras de Contrato', document.getElementById('compras-resultado')?.textContent || '0 pontos', '60%', '', ''],
+        ['', 'Aderência ao Processo', document.getElementById('aderencia-resultado')?.textContent || '0%', '40%', notasSetores.compras.toFixed(2), obterStatusIndicador(notasSetores.compras)],
         
         // ESTOQUE  
         ['ESTOQUE', 'Estoque Parado +90 dias', document.getElementById('estoque-resultado-parado')?.textContent || '0%', '25%', '', ''],
@@ -736,7 +764,8 @@ function gerarExcelSetor(codigo, trimestre, setor) {
         dadosSetor.push(
             ['INDICADORES DETALHADOS'],
             ['Indicador', 'Resultado', 'Peso'],
-            ['Compras de Contrato', document.getElementById('compras-resultado')?.textContent || '0%', '60%']
+            ['Compras de Contrato', document.getElementById('compras-resultado')?.textContent || '0%', '60%'],
+            ['Aderência ao Processo', document.getElementById('aderencia-resultado')?.textContent || '0%', '40%']
         );
     } else if (setor === 'estoque') {
         dadosSetor.push(

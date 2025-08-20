@@ -65,7 +65,7 @@
                 </div>
                 
                 <div class="indicador-card">
-                    <h3>Compras de Contrato (60% do grupo)</h3>
+                    <h3>Compras de Contrato</h3>
                     <p class="indicador-desc">Verificar se produtos foram comprados corretamente dentro do processo ESC</p>
                     
                     <div class="indicador-inputs">
@@ -92,6 +92,37 @@
                             <tr><td>10% a 15% de erro</td><td>50 pontos</td></tr>
                             <tr><td>Acima de 15% de erro</td><td>0 pontos</td></tr>
                         </table>
+                    </div>
+                </div>
+
+                <div class="indicador-card">
+                    <h3>Aderência ao Processo de Compras</h3>
+                    <p class="indicador-desc">Obtenção de no mínimo 3 cotações e formalização adequada do pedido</p>
+                    
+                    <div class="indicador-inputs">
+                        <div class="input-pair">
+                            <label>Total de Compras Realizadas:</label>
+                            <input type="number" id="aderencia-total-compras" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="input-pair">
+                            <label>Compras com 3+ Cotações:</label>
+                            <input type="number" id="aderencia-com-cotacoes" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="input-pair">
+                            <label>Pedidos Formalizados:</label>
+                            <input type="number" id="aderencia-pedidos-formalizados" min="0" oninput="calcularCompras()">
+                        </div>
+                        <div class="resultado-indicador" id="aderencia-resultado">0%</div>
+                    </div>
+
+                    <div class="tabela-pontuacao">
+                        <h4>📊 Como Pontuar:</h4>
+                        <table>
+                            <tr><td><strong>Cotações (50%):</strong></td><td>Quanto maior % de compras com 3+ cotações, melhor</td></tr>
+                            <tr><td><strong>Formalização (50%):</strong></td><td>Quanto maior % de pedidos formalizados, melhor</td></tr>
+                            <tr><td><strong>Meta:</strong></td><td>100% em ambos = Nota 10 | 80% = Nota 8 | 50% = Nota 5</td></tr>
+                        </table>
+                        <p><strong>💡 Dica:</strong> Para nota máxima, todas as compras devem ter 3+ cotações E estar formalizadas!</p>
                     </div>
                 </div>
 
